@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float _health;
     [SerializeField] private float _step;
-    [SerializeField] private float _damage;
 
     private Coroutine _coroutine;
 
@@ -23,28 +22,32 @@ public class Player : MonoBehaviour
         CurrentHealth = _health;
     }
 
-    private void HealthChanger()
+    public void ApplyDamage(float damage)
     {
-        TurnOn();
+        TurnOn(damage);
     }
 
-    private IEnumerator ChangingHealth()
+    public void Heal(float Heal)
+    {
+        TurnOn(Heal);
+    }
+
+    private IEnumerator ChangingHealth(float number)
     {
         var waitHalthSecond = new WaitForSeconds(0.5f);
-
-        for (int i = 0; i < _damage / _step; i++)
+        
+        for (int i = 0; i < number / _step; i++)
         {
-            CurrentHealth = Mathf.MoveTowards(CurrentHealth, CurrentHealth + _damage, _step);
-            HealthChanged?.Invoke(CurrentHealth, _health);
+            CurrentHealth = Mathf.MoveTowards(CurrentHealth, CurrentHealth + number, _step);
             yield return waitHalthSecond;
         }
-
-        TurnOff();
     }
 
-    public void TurnOn()
+    public void TurnOn(float number)
     {
-        _coroutine = StartCoroutine(ChangingHealth());
+        _coroutine = StartCoroutine(ChangingHealth(number));
+        HealthChanged?.Invoke(CurrentHealth, _health);
+        
     }
 
     public void TurnOff()

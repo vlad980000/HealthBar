@@ -16,9 +16,4 @@ public class Healthbar : Bar
     {
         _player.HealthChanged -= OnValueChanged;
     }
-
-    private void Update()
-    {
-        OnValueChanged(_player.CurrentHealth,_player.Health);
-    }
 }
