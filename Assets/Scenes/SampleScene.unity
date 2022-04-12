@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 476471092}
   - component: {fileID: 476471091}
   m_Layer: 5
-  m_Name: CureButton
+  m_Name: HealButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

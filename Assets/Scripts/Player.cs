@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void CureHealth(float damage)
+    public void Heal(float damage)
     {
         if(CurrentHealth + damage <= _health)
         {
