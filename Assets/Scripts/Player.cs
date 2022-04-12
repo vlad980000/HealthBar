@@ -16,31 +16,18 @@ public class Player : MonoBehaviour
     private void Start()
     {
         CurrentHealth = _health;
+        Mathf.Clamp(CurrentHealth, 0, _health);
     }
 
     public void ApplyDamage(float damage)
     {
-        if (CurrentHealth >= damage)
-        {
-            CurrentHealth -= damage;
-            HealthChanged?.Invoke(CurrentHealth,_health);
-        }
-        else
-        {
-            Debug.Log("Здоровья слишком мало, сначала нужно вылечить пациента");
-        }
+        CurrentHealth -= damage;
+        HealthChanged?.Invoke(CurrentHealth, _health);
     }
 
     public void Heal(float damage)
     {
-        if(CurrentHealth + damage <= _health)
-        {
-            CurrentHealth += damage;
-            HealthChanged?.Invoke(CurrentHealth, _health);
-        }
-        else
-        {
-            Debug.Log("Здоровья будет слишком много, сначала нужно покалечить пациента");
-        }
+        CurrentHealth += damage;
+        HealthChanged?.Invoke(CurrentHealth, _health);
     }
 }
