@@ -16,18 +16,17 @@ public class Player : MonoBehaviour
     private void Start()
     {
         CurrentHealth = _health;
-        Mathf.Clamp(CurrentHealth, 0, _health);
     }
 
     public void ApplyDamage(float damage)
     {
-        CurrentHealth -= damage;
+        CurrentHealth = Mathf.Clamp(CurrentHealth - damage, _health - _health, _health);
         HealthChanged?.Invoke(CurrentHealth, _health);
     }
 
     public void Heal(float damage)
     {
-        CurrentHealth += damage;
+        CurrentHealth = Mathf.Clamp(CurrentHealth + damage, _health - _health, _health);
         HealthChanged?.Invoke(CurrentHealth, _health);
     }
 }
