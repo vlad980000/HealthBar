@@ -9,6 +9,6 @@ public abstract class Bar : MonoBehaviour
 
     public void OnValueChanged(float value, float maxValue)
     {
-        Slider.value = Mathf.MoveTowards(Slider.value,value / maxValue,0.1f);
+        Slider.value = Mathf.MoveTowards(Slider.value,value / maxValue,Time.deltaTime * 0.1f);
     }
 }

@@ -9,7 +9,9 @@ public class Player : MonoBehaviour
 
     private float _currentHealth;
 
-    
+    public float CurrentHealth => _currentHealth;
+
+    public float Health => _health;
 
     public event UnityAction<float,float> HealthChanged;
 
