@@ -7,9 +7,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float _health;
 
-    private float _currentHealth;
-
-    public float CurrentHealth => _currentHealth;
+    public float CurrentHealth { get;private set; }
 
     public float Health => _health;
 
@@ -17,15 +15,15 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        _currentHealth = _health;
+        CurrentHealth = _health;
     }
 
     public void ApplyDamage(float damage)
     {
-        if (_currentHealth >= damage)
+        if (CurrentHealth >= damage)
         {
-            _currentHealth -= damage;
-            HealthChanged?.Invoke(_currentHealth,_health);
+            CurrentHealth -= damage;
+            HealthChanged?.Invoke(CurrentHealth,_health);
         }
         else
         {
@@ -35,10 +33,10 @@ public class Player : MonoBehaviour
 
     public void CureHealth(float damage)
     {
-        if(_currentHealth + damage <= _health)
+        if(CurrentHealth + damage <= _health)
         {
-            _currentHealth += damage;
-            HealthChanged?.Invoke(_currentHealth, _health);
+            CurrentHealth += damage;
+            HealthChanged?.Invoke(CurrentHealth, _health);
         }
         else
         {
