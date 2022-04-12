@@ -6,52 +6,27 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float _health;
-    [SerializeField] private float _step;
+    private readonly float _maxHealth = 100;
+    private readonly float _minHealth = 0;
+    private float _currentHealth;
 
-    private Coroutine _coroutine;
-
-    public float CurrentHealth { get;private set; }
-
-    public float Health => _health;
-
-    public event UnityAction<float,float> HealthChanged;
+    public event UnityAction<float> HealthChanged;
 
     private void Start()
     {
-        CurrentHealth = _health;
+        _currentHealth = _maxHealth;
+        HealthChanged?.Invoke(_currentHealth);
     }
 
     public void ApplyDamage(float damage)
     {
-        TurnOn(damage);
+        _currentHealth = Mathf.Clamp(_currentHealth - damage, _minHealth, _maxHealth);
+        HealthChanged?.Invoke(_currentHealth);
     }
 
-    public void Heal(float Heal)
+    public void Heal(float heal)
     {
-        TurnOn(Heal);
-    }
-
-    private IEnumerator ChangingHealth(float number)
-    {
-        var waitHalthSecond = new WaitForSeconds(0.5f);
-        
-        for (int i = 0; i < number / _step; i++)
-        {
-            CurrentHealth = Mathf.MoveTowards(CurrentHealth, CurrentHealth + number, _step);
-            yield return waitHalthSecond;
-        }
-    }
-
-    public void TurnOn(float number)
-    {
-        _coroutine = StartCoroutine(ChangingHealth(number));
-        HealthChanged?.Invoke(CurrentHealth, _health);
-        
-    }
-
-    public void TurnOff()
-    {
-        StopCoroutine(_coroutine);
+        _currentHealth = Mathf.Clamp(_currentHealth + heal, _minHealth, _maxHealth);
+        HealthChanged?.Invoke(_currentHealth);
     }
 }

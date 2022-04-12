@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.2589805, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -330,8 +330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9169f5dc6bc674762854c5bbec58eb75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
-  _step: 0.2
 --- !u!212 &403852427
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -483,11 +481,11 @@ MonoBehaviour:
       - m_Target: {fileID: 403852426}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: Heal
-        m_Mode: 3
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 10
+          m_IntArgument: 0
           m_FloatArgument: 10
           m_StringArgument: 
           m_BoolArgument: 0
@@ -863,7 +861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1144,12 +1142,12 @@ MonoBehaviour:
       - m_Target: {fileID: 403852426}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: ApplyDamage
-        m_Mode: 3
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: -10
-          m_FloatArgument: -10
+          m_IntArgument: 0
+          m_FloatArgument: 10
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -1242,8 +1240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86295b037cec414c8a81ae664a12d78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Slider: {fileID: 1949451719}
   _player: {fileID: 403852426}
+  _slider: {fileID: 1949451719}
 --- !u!114 &1949451719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1289,9 +1287,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
