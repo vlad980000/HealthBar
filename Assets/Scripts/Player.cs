@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _health;
+    [SerializeField] private float _step;
+    [SerializeField] private float _damage;
+
+    private Coroutine _coroutine;
 
     public float CurrentHealth { get;private set; }
 
@@ -18,15 +23,32 @@ public class Player : MonoBehaviour
         CurrentHealth = _health;
     }
 
-    public void ApplyDamage(float damage)
+    private void HealthChanger()
     {
-        CurrentHealth = Mathf.Clamp(CurrentHealth - damage, _health - _health, _health);
-        HealthChanged?.Invoke(CurrentHealth, _health);
+        TurnOn();
     }
 
-    public void Heal(float damage)
+    private IEnumerator ChangingHealth()
     {
-        CurrentHealth = Mathf.Clamp(CurrentHealth + damage, _health - _health, _health);
-        HealthChanged?.Invoke(CurrentHealth, _health);
+        var waitHalthSecond = new WaitForSeconds(0.5f);
+
+        for (int i = 0; i < _damage / _step; i++)
+        {
+            CurrentHealth = Mathf.MoveTowards(CurrentHealth, CurrentHealth + _damage, _step);
+            HealthChanged?.Invoke(CurrentHealth, _health);
+            yield return waitHalthSecond;
+        }
+
+        TurnOff();
+    }
+
+    public void TurnOn()
+    {
+        _coroutine = StartCoroutine(ChangingHealth());
+    }
+
+    public void TurnOff()
+    {
+        StopCoroutine(_coroutine);
     }
 }
